@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <ctime>
 
 using namespace std;
 
@@ -340,4 +341,29 @@ int main()
     //list1->print();
 
 
+    char alphabet[] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','x','z' };
+
+
+
+    srand(time(NULL));
+
+    LinkedList<simple_object>* list1 = new LinkedList<simple_object>();
+
+    for (int k = 1; k <= 5; k++) {
+
+        int quantity = pow(10, k);
+
+        // dodawanie na końcu
+        clock_t start_time = clock();
+        for (int i = 0; i < quantity; i++) {
+            simple_object obj;
+            obj.f1 = (rand() % 50) + 1;
+            obj.f2 = alphabet[rand() % 26];
+        }
+        clock_t end_time = clock();
+
+        double measured_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+        cout << measured_time;
+
+    }
 }
