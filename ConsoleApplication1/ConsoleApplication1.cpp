@@ -1,5 +1,13 @@
-﻿#include <iostream>
+﻿//ALGO2 IS1 214A LAB01
+//Krystian Szabat
+//sk51114@zut.edu.pl
+
+
+
+
+#include <iostream>
 #include <ctime>
+#include <string>
 
 using namespace std;
 
@@ -119,7 +127,6 @@ struct LinkedList {
         }
     }
 
-    // zmienić z voida można dodać sprawdzeni czy blizej konca czy poczatku i sie przesuwac albo od head next albo od tail prev
     T get(int i) {
 
         checkRange(i);
@@ -247,11 +254,11 @@ struct LinkedList {
         head = tail = nullptr;
     }
 
-    void print() {
-
+    string str(string (*func)(T)) {
+        string s = "";
         if (head == nullptr) {
-            cout << "Lista jest pusta";
-            return;
+            s = "Lista jest pusta";
+            return s;
         }
 
         Node<T>* n = head;
@@ -259,9 +266,11 @@ struct LinkedList {
         // iteracja po węzłach
 
         while (n != nullptr) {
-            cout << n->data.f1 << ' ' << n->data.f2 << '\n';
+            s += func(n->data);
             n = n->next;
         }
+
+        return s;
 
     }
 };
@@ -270,6 +279,10 @@ struct simple_object {
     int f1;
     char f2;
 };
+
+string so_str(simple_object so) {
+    return to_string(so.f1) + ' ' + so.f2 + '\n';
+}
 
 int compareSimpleObjects(simple_object o1, simple_object o2) {
     if (o1.f1 == o2.f1)
@@ -293,9 +306,9 @@ int main()
     list1->removeFirst();
     list1->removeLast();
     list1->removeLast();
-    list1->print();
+    cout << list1->str(so_str);
     list1->clear();
-    list1->print();*/
+    cout << list1->str(so_str);;*/
 
 
 
@@ -313,11 +326,11 @@ int main()
     //list1->removeLast();
     //list1->clear();
 
-    //list1->print();
+    //cout << list1->str(so_str);
 
     //list1->changeData(1, obj3);
     // 
-    //list1->print();
+    //cout << list1->str(so_str);
     /*try {
         simple_object obj3 = list1->get(1);
         cout << '\n' << obj3.f1 << '\n';
@@ -338,7 +351,7 @@ int main()
     //    cout << "Niepowodzenie";
 
     //cout << "\n\n";
-    //list1->print();
+    //cout << list1->str(so_str);
 
 
     char alphabet[] = { 'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','y','x','z' };
@@ -349,7 +362,7 @@ int main()
 
     LinkedList<simple_object>* list1 = new LinkedList<simple_object>();
 
-    for (int k = 1; k <= 5; k++) {
+    for (int k = 1; k <= 10; k++) {
 
         int quantity = pow(10, k);
 
@@ -362,8 +375,8 @@ int main()
         }
         clock_t end_time = clock();
 
-        double measured_time = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-        cout << measured_time;
+        double measured_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+        cout << measured_time << '\n';
 
     }
 }
